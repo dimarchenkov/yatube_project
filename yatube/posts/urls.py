@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('group/<str:text>/', views.group_posts)
+    path('group_list.html/', views.group_posts)
 ]
