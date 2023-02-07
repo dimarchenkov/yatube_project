@@ -1,9 +1,10 @@
-# from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group
 
 
 def index(request):
+    """Отрисовка главной страница."""
+
     template = 'posts/index.html'
     title = 'Последние обновления на сайте'
     posts = Post.objects.order_by('-pub_date')[:10]
@@ -15,6 +16,8 @@ def index(request):
 
 
 def group_posts(request, slug):
+    """Отрисовка страницы постов."""
+
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
     title = f'Записи группы {group.title}'
@@ -24,5 +27,4 @@ def group_posts(request, slug):
         'group': group,
         'posts': posts,
     }
-
     return render(request, template, context)

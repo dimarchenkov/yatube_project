@@ -2,4 +2,5 @@ from django.apps import AppConfig
 
 
 class PostsConfig(AppConfig):
-    name = 'posts'
+    """Регистрация приложения posts."""
+    name: str = 'posts'
