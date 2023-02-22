@@ -6,19 +6,25 @@ User = get_user_model()
 
 
 class Group(models.Model):
-    """Класс для управления группами."""
+    """Group class."""
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(
+        max_length=200,
+        unique=True
+    )
     description = models.TextField()
 
+    class Meta:
+        ordering = ["-title"]
+
     def __str__(self):
-        """Получить название группы."""
+        """Get Group name."""
         return self.title
 
 
 class Post(models.Model):
-    """Класс управления постами."""
+    """Post class."""
 
     text = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
@@ -29,10 +35,15 @@ class Post(models.Model):
     )
     group = models.ForeignKey(
         Group,
-        blank=True, null=True,
-        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='posts',
     )
 
+    class Meta:
+        ordering = ['-pub_date']
+
     def __str__(self):
-        """Получить текст поста."""
+        """Get post text."""
         return self.text

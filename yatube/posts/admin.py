@@ -4,8 +4,8 @@ from .models import Post, Group
 
 
 class PostAdmin(admin.ModelAdmin):
-    """Определение полей, которые должны отображаться в админке."""
-    list_display: tuple = (
+    """Custom admin model for posts."""
+    list_display = (
         'pk',
         'text',
         'pub_date',
@@ -13,12 +13,21 @@ class PostAdmin(admin.ModelAdmin):
         'group',
     )
     list_editable = ('group',)
-    # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('text',)
-    # Добавляем возможность фильтрации по дате
     list_filter = ('pub_date',)
     empty_value_display = '-пусто-'
 
 
+class GroupAdmin(admin.ModelAdmin):
+    """Custom admin model for groups"""
+    list_display = (
+        'pk',
+        'title',
+        'slug',
+        'description',
+    )
+    search_fields = ('title',)
+
+
 admin.site.register(Post, PostAdmin)
-admin.site.register(Group)
+admin.site.register(Group, GroupAdmin)
