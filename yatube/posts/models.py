@@ -7,7 +7,6 @@ User = get_user_model()
 
 class Group(models.Model):
     """Group class."""
-
     title = models.CharField(max_length=200)
     slug = models.SlugField(
         max_length=200,
@@ -16,7 +15,7 @@ class Group(models.Model):
     description = models.TextField()
 
     class Meta:
-        ordering = ["-title"]
+        ordering = ['-title']
 
     def __str__(self):
         """Get Group name."""
@@ -25,13 +24,19 @@ class Group(models.Model):
 
 class Post(models.Model):
     """Post class."""
-
-    text = models.TextField()
-    pub_date = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(
+        'Текст поста',
+        help_text='Введите текст поста'
+    )
+    pub_date = models.DateTimeField(
+        'Дата публикации',
+        auto_now_add=True
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='posts'
+        related_name='posts',
+        verbose_name='Автор',
     )
     group = models.ForeignKey(
         Group,
@@ -39,6 +44,8 @@ class Post(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='posts',
+        verbose_name='Группа',
+        help_text='Группа, к которой будет относиться пост',
     )
 
     class Meta:

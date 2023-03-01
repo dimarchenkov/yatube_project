@@ -6,7 +6,8 @@
 [![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/index.html)
 [![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
-## hw03_forms added
+## hw03_forms after review
+
 ## Запуск проекта в dev-режиме
 - Установить и активируйте виртуальное окружение
 - Установить зависимости из файла requirements.txt

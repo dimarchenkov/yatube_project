@@ -10,7 +10,12 @@ SECRET_KEY = '&)ato^l=u!g_%8+w&f4qi5#_(n#xhwom+44n46us(ez3i^mf1q'
 DEBUG = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
+    'testserver',
+]
 
 # Application definition
 
@@ -115,3 +120,6 @@ LOGIN_REDIRECT_URL = 'posts:index'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+# Const for number of posts per page
+COUNT_PER_PAGE = 10
