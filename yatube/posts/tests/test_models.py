@@ -1,9 +1,6 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from ..models import Group, Post
-
-User = get_user_model()
+from ..models import Group, Post, User
 
 
 class PostModelTest(TestCase):
@@ -19,24 +16,21 @@ class PostModelTest(TestCase):
         )
         cls.post = Post.objects.create(
             author=cls.user,
-            text='Тестовый пост из не более 15 символов',
+            text='Тестовый пост более 15 символов',
         )
 
     def test_models_have_correct_object_names(self):
         """Test model Post have correct object name."""
-        # post = PostModelTest.post
-        self.assertEqual(str(PostModelTest.post), PostModelTest.post.text[:15])
-
-    def test_models_have_correct_object_names(self):
-        """Test model Group have correct object name."""
-        group = PostModelTest.group
-        self.assertEqual(str(group), group.title)
+        self.assertEqual(
+            str(PostModelTest.post),
+            PostModelTest.post.text[:15]
+        )
 
     def test_models_have_verbose_name(self):
-        """verbose_name в полях совпадает с ожидаемым."""
+        """Test verbose_name."""
         post = PostModelTest.post
         field_verboses = {
-            'text': 'Текст',
+            'text': 'Текст поста',
             'group': 'Группа'
         }
         for field, expected_value in field_verboses.items():
@@ -45,10 +39,10 @@ class PostModelTest(TestCase):
                     post._meta.get_field(field).verbose_name, expected_value)
 
     def test_models_have_help_text(self):
-        """help_text в полях совпадает с ожидаемым."""
+        """Test help_text."""
         post = PostModelTest.post
         field_help_texts = {
-            'text': 'Текст вашего поста',
+            'text': 'Введите текст поста',
             'group': 'Укажите название вашей группы'
         }
         for field, expected_value in field_help_texts.items():
@@ -58,7 +52,7 @@ class PostModelTest(TestCase):
 
 
 class GroupModelTest(TestCase):
-    """Создаем тестовый пост и группу."""
+    """Group model testing."""
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -69,6 +63,6 @@ class GroupModelTest(TestCase):
         )
 
     def test_models_have_correct_object_names(self):
-        """Проверяем, что у моделей корректно работает __str__."""
+        """Test model Group have correct object name."""
         group = GroupModelTest.group
         self.assertEqual(str(group), group.title)

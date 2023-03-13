@@ -22,7 +22,7 @@
           </div>
           <div class="card-body"> 
             {% include 'includes/errors.html' %}
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {% include 'includes/form_fields_display.html' %}
               <div class="d-flex justify-content-end">
